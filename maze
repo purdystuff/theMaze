@@ -1,0 +1,649 @@
+import time
+import random
+from random import randint
+from textwrap import dedent
+
+class Adventurer(object):
+
+    def __init__(self, name, hp):
+        self.name = name
+        self.hp = hp
+
+        def getHP(self):
+            return self.hp
+
+        def setHP(self):
+            self.hp = adv_hp
+
+class Enemy(object):
+
+    def __init__(self, name, hp):
+        self.name = name
+        self.hp = hp
+
+print(dedent("""
+You awaken to find yourself in a strange place.  You have no idea how you got here.
+One minute you were happily saying good night to your family and drifting off to
+sleep and the now you are laying on path looking at a pecuilar building.
+"""))
+
+print("\nHello Dear adventurer! What is your name?")
+adv_1 = Adventurer(input(), 10)
+print(f"\nHello {adv_1.name} and welcome to the 'Maze of Mayhem'")
+print("\npress 'enter'")
+input()
+
+# print("And what is the name of your strong companion?")
+# adv_2 = Adventurer(input(), 10)
+# print(">>>", adv_2.name)
+
+
+enm_1 = Enemy("Buttfist", 5)
+enm_2 = Enemy("Minotauro", 10)
+
+class Room(object):
+
+    def __init__(self, name):
+        self.name = name
+
+
+class DarkPassage(Room):
+
+    def enter():
+        print(dedent("""
+        Ahead of you is a dark path.  You wander around but no matter which way
+        you go you always end up return to the same spot in front of the maze
+        entrance.
+        """))
+        print("press 'enter'")
+        input()
+        return Maze.enter()
+
+
+class Maze(Room):
+
+    def enter():
+
+        print(dedent("""
+        You approach a stone door covered in moss.  On either side are thorny
+        hedges towering 20 feet high.  The thornes are razor sharp and at least
+        two inches long.  A statue of a Minotaur etched in stone stares at you.
+        It almost seems alive. The half bull, half man creature is gripping an
+        axe made of steel.
+        The stone door is slightly ajar.
+
+                         Will you "enter" or "turn back"?
+          """))
+
+        choice = input()
+        if choice == "enter":
+            print("Onward.")
+
+        elif choice == "turn back":
+            return DarkPassage.enter()
+
+        else:
+            Invalid()
+            return Maze.enter()
+
+        print(dedent("""
+        With the slightest push the door swings wide open with a loud crash.
+        Bats emerge from a hole in the wall and fly towards your head.  They are
+        easily shooed away but you are filled with a eerie sense as an icy wind
+        cracks across your skin.
+        Up ahead you see two paths.
+
+        To the right you hear a distant wind.
+
+        To the left you smell a putrid odor.
+
+                        Will you go "right" or "left?"
+         """))
+
+        choice = input()
+
+        if choice == "right":
+
+            print(dedent("""
+            You step through the door onto a rain slicked precipe as  you stumble
+            towards the edge. Immediately you scramble to catch yourself.
+            """))
+
+            print("Press 'enter' to roll.")
+            input()
+            roll = randint(1,20)
+            print (f"{adv_1.name} rolls:", roll)
+
+            if roll >= 10:
+                print(dedent("""
+                Your body careens toward the edge.  You reach out for anything to
+                grab onto.  All you can grasp are smooth, slick rocks.  Finally you
+                find some purchase on a jagged rock.  You manage to pull yourself
+                back through the door you came in. Wow that was a close one! You
+                are lucky to be alive.
+                """))
+                return Maze.enter()
+
+            elif roll < 10:
+                print(dedent("""
+                You are sliding and sliding fast.  There is nothing to grab onto
+                except slick rocks.  Your body careens towards the edge and you
+                plunge head first over the edge.
+                """))
+                time.sleep(5)
+                print(dedent("""
+                You have been falling for a really long time.  How long is the chasm
+                anyway?  As your life flashes before your eyes you are abrubtly
+                greeted with the bottom.  Your body explodes on the sharp rocks.
+                """))
+                print("press 'enter'")
+                input()
+                return Death.enter()
+
+        elif choice == "left":
+            print(dedent("""
+            The smell of flatulence hangs heavy in the air.  Above a raised dias,
+            a golden insignia embossed with grotesque images of buttocks
+            and fists, hangs from a thick chain.
+            As you approach you are nearly flattened by the stench. A trap door
+            opens on the floor and a creature emerges.  What can only be
+            described as a "Buttfist" stumbles towards you continuing to fart
+            in your general direction.  The walking butt and fist creature begins
+            to swing wildly at you.
+
+                            Will you "attack" or "run"?
+            """))
+            choice = input()
+
+            if choice == "attack":
+                combat(0, adv_1, enm_1)
+                return Antechamber.enter()
+
+            elif choice == "run":
+                print("You are a coward")
+                print("press 'enter'")
+                input()
+                return Death.enter()
+
+            else:
+                Invalid()
+                return Maze.enter()
+
+        else:
+            Invalid()
+            return Maze.enter()
+
+class Antechamber(Room):
+
+    def enter():
+        print(dedent("""
+        One last flatulence emerges from the body of Buttfist as he falls to the
+        ground in writhing agony.  You rejoice as you behold your vanquished foe.
+
+        Through the trap door where the creature first emerged is a set of stairs.
+        There is a small opening in the back of the room that opens to a small
+        room. There are three identical doors before you.
+
+                        Will you choose door "1", "2", or "3"?
+        """))
+
+        choice = input()
+
+        if choice == "1":
+            print("You go through door number 1.")
+            time.sleep(2)
+            print(dedent(f"""
+            A large black obelisk stands in the middle of the room. At the base
+            of the obelisk is a glowing green portal. It is whispering {adv_1.name},
+            come closer. Step in.  You will feel safe.
+
+                            Will you "enter" or "turn back"?
+            """))
+
+            choice2 = input()
+
+            if choice2 == "enter":
+                 return Maze.enter()
+
+            elif choice2 == "turn back":
+                 return Antechamber.enter()
+
+            else:
+                Invalid()
+                return Antechamber.enter()
+
+        elif choice == "2":
+            print(dedent("""
+            You enter a large room with massive ceilings. Four brick walls
+            surround you on each side.
+
+                            Do you want to "search" or "turn back"?
+            """))
+
+            choice2 = input()
+
+            if choice2 == "search":
+                time.sleep(5)
+                print("Nothing but impenetrable walls here.")
+                print("press 'enter'")
+                input()
+                return Antechamber.enter()
+
+            elif choice2 == "turn back":
+                return Antechamber.enter()
+
+            else:
+                Invalid()
+                return Antechamber.enter()
+
+        elif choice == "3":
+            print(dedent(f"""
+            When you open the door to this room you are greeted with the most
+            lovely smells.  A large table in the middle of the room is
+            overflowing with delicious foods. Various cakes, brownies, cookies
+            sit at one end of the table. Bowls of Chicken Tikka Masala, Spaghetti
+            and Chicken Noodle soup send up wips of steam.
+            A giant tub of Nutella with a wide variety of items to dip in surround
+            it, marshmallows, strawberries, graham crackers and more.
+            When is the last time you have eaten?  I am sure that you are getting
+            very hungry {adv_1.name}.
+
+                        Will you "eat" from the feast table or "move on"?
+            """))
+
+            choice2 = input()
+
+            if choice2 == "eat":
+                print(dedent("""
+                You begin to gorge yourself on all the delicious food.  Everything
+                tastes soooo good.  You feel your strength beginning to return.
+
+                But then you start to feel very ill.  Something is definitely
+                wrong with this food.  You blink once and then blink again.  What
+                was once a delicious looking feast has now turned to piles of
+                maggots and bowls of festering ooze.  Horrid smells whip into
+                your nostrils. You start shaking and foaming at the mouth.
+                """))
+                print("press 'enter'")
+                input()
+                return Death.enter()
+
+            elif choice2 == "move on":
+                print(dedent("""
+                While certainly tempting, something about that food just didn't
+                seem right.  You walk past the feast table towards the next door.
+                """))
+                return Center.enter()
+
+            else:
+                Invalid()
+                return Antechamber.enter()
+
+        else:
+            Invalid()
+            return Antechamber.enter()
+
+class Center(Room):
+    def enter():
+        print(dedent("""
+        It seems that you have entered the center of the labyrinth.  The hedges are
+        overgrown and look almost alive.  Thorny vines wrap around the various
+        hideous statues that adore the plaza.  The deep silence is occassionally
+        interruppted by caws of a giant black crow. He stares at you and then
+        flies into the distance.
+
+        The door that you just entered slams and then bolts shut. A
+        thunderous voice alerts you. "You will never escape this labyrinth, you
+        will stumble around until go insane, insane INSANE.
+
+        As the voice continues to ring in your ear you see the hedges begin to
+        move.  Three paths open up where once was dense brush.
+
+                Which path will you take "left", "middle", or "right"?
+        """))
+        choice = input()
+        if choice == "left":
+            print(dedent("""
+            You procede down the path.  The vines swim around with a greater
+            intensity. You see a thorny tendril shoot out. It starts to wrap
+            around your leg.  You reach down to free yourself and strike it with
+            the crude implement that you have been using as a weapon.
+            """))
+
+            print("Press 'enter' to roll.")
+            input()
+            roll = randint(1,20)
+            print (f"{adv_1.name} rolls:", roll)
+
+            if roll >= 12:
+                print(dedent("""
+                You whack at the vine and sever it in two. You succeed in freeing
+                yourslef from the thorny vine.
+                """))
+                return Minotauro.enter()
+
+            elif roll < 12:
+                print(dedent("""
+                You scream in agony as you dragged into the hedge.  Wild thorns
+                slash at your skin, tearing it to shreds.  Vines wrap around your
+                neck and slowly chokes the life from you.
+                """))
+                print("press 'enter'")
+                input()
+                return Death.enter()
+
+        elif choice == "middle":
+                print(dedent("""
+                This path is serene, almost too serene. As you approach a large
+                wooden door you hear maniacal laughter.
+
+                            Will you "enter" or "turn back"?
+                """))
+
+                choice = input()
+
+                if choice == "enter":
+                    print("The heavy oak door swings open and you step inside.")
+                    return Minotauro.enter()
+
+                elif choice == "turn back":
+                    print(dedent("""
+                    You turn around to go back the way you came.  But your way
+                    is barred. The canopy grows over and it is immediately pitch
+                    black.  You spend days trying to find an exit.  You mind starts
+                    to go dark. You are filled with deep hunger and regret until
+                    finally you just curl up and die.
+                    """))
+                    print("press 'enter'")
+                    input()
+                    return Death.enter()
+
+                else:
+                    Invalid()
+                    return Center.enter()
+
+        elif choice == "right":
+            print(dedent("""
+            The thorny path opens into another clearing. A door that looks to
+            be made of solid gold stands before you. As you enter you hear
+            what sounds like harps, a heavenly chorus of invisible voices
+            accompnanies. The walls are adorned with gems and intricate reliefs.
+
+            In the middle of the room is a pool of completely placid water.
+            You feel compelled to stare into the pool.
+
+                        Will you "stare" or "leave"?
+            """))
+
+            choice = input()
+
+            if choice == "stare":
+                print(dedent("""
+                You look into the pool reflected all the beauty of the room.
+                Your mind begins to go fuzzy until it is completely blank.
+                You can't remember where you are or even who you are. Drool
+                begins to form around your mouth.  You body tumbles forward
+                into the pool.  As you break the plane of the water the
+                water remains smooth as glass.
+
+                Your blank shell of a body sinks to the bottom to join the
+                other skeletons gathered there.
+                """))
+                print("press 'enter'")
+                input()
+                return Death.enter()
+
+            elif choice == "leave":
+                print(dedent("""
+                Even though this is one of the most beautiful rooms that
+                you have ever encountered, you know that there is something
+                wrong here.  Best to retrace your steps.  You head back to
+                the center of the labyrinth.
+                """))
+                return Center.enter()
+
+            else:
+                Invalid()
+                return Center.enter()
+
+        else:
+            Invalid()
+            return Center.enter()
+
+class Minotauro(Room):
+    def enter():
+        print(dedent("""
+        Before you stands a large creature, his head is shaped like a bull with
+        two protruding horns and dead black eyes that stare at you.  His
+        torso is that of a muscular man adorned with a studded leather vest.  His
+        legs are covered in black fur and he walks on cloven foot.  In the corner
+        are piles of human remains, bones and skulls surrounded by some fresher
+        specimins.
+
+        Gripping his axe he yells at you.  "Meet your peril, human."
+
+        He begins to charge. His giant axe swining for your head.
+        """))
+        combat(0, adv_1, enm_2)
+        return Treasure.enter()
+
+class Treasure(Room):
+    def enter():
+        print(dedent("""
+        Surprisingly and amazingly you are able to fend off the Minotaur.  Plunging
+        your crude weapon into his neck, he gurgles and spits out blood, he almost
+        looks at peace before the life drains from his face. He crumples to the floor,
+        blood washing over the sun bleached bones around him.
+
+        In the corner of the room you spot a chest filled with jewels, gold and
+        unique artifacts.
+
+                        Will you "take" some treasure or "exit"?
+        """))
+
+        choice = input()
+
+        if choice == "take":
+            print("""
+                                         _.--.
+                                    _.-'_:-'||
+                                _.-'_.-::::'||
+                           _.-:'_.-::::::'  ||
+                         .'`-.-:::::::'     ||
+                        /.'`;|:::::::'      ||_
+                       ||   ||::::::'     _.;._'-._
+                       ||   ||:::::'  _.-!oo @.!-._'-.
+                       |'.  ||:::::.-!()oo @!()@.-'_.|
+                        '.'-;|:.-'.&$@.& ()$%-'o.'\ ||
+                          `>'-.!@%()@'@_%-'_.-o _.|'||
+                           ||-._'-.@.-'_.-' _.-o  |'||
+                           ||=[ '-._.-\ /.-'    o |'||
+                           || '-.]=|| |'|      o  |'||
+                           ||      || |'|        _| ';
+                           ||      || |'|    _.-'_.-'
+                           |'-._   || |'|_.-'_.-'
+                           '-._'-.|| |' `_.-'
+                                '-.||_/.-'
+            """)
+
+            input()
+            print(dedent("""
+            You search through the chest looking for the very best items.
+            You start to fill your pockets with gold and gems.
+            """))
+            return Escape.enter()
+
+        elif choice == "exit":
+            print("\nYou will return home empty handed but at least you are alive.")
+            return Win.enter()
+
+        else:
+            Invalid()
+            return Treasure.enter()
+
+class Escape(Room):
+    def enter():
+        print(dedent("""
+        As you pick up your chosen treasure you hear the sound of gong.  The room
+        and everything around you begins to crumble. Blocks of stone begin falling
+        all around you.
+
+        You run for your life!
+        """))
+
+        print("Press 'enter' to roll.")
+        input()
+        roll = randint(1,20)
+        print (f"{adv_1.name} rolls:", roll)
+
+        if roll >= 14:
+            print(dedent("""
+            You dodge and roll your way through the maze, reatracing your steps
+            to the exit.  There were a few close calls but you made it.  You lie
+            on the ground panting with pockets full of treasure.
+
+            It's a good day to be alive you think to yourself.
+            """))
+            return Win.enter()
+
+        elif roll < 14:
+            print(dedent("""
+             You dodge and roll your way through the maze, reatracing your steps
+             to the exit.  There were a few close calls.  You can see the exit
+             ahead of you. You pick up speed excited to leave the maze.
+             Unfortunately you trip on a rock in the path, rolling forward.
+             Lying on your back you look up as a giant boulder crushes your head.
+            """))
+            return Death.enter()
+
+class Win(Room):
+    def enter():
+        print(dedent("""
+        Congratulations! You made it through the maze and defeated the Minotaur.
+        You barely made it out with your life.  Your family will be so happy to see
+        you again!
+        """))
+        input()
+        exit()
+
+class Death(Room):
+
+    def enter():
+        quips = ["You Dead.", "You are sooooooooo Dead.",
+        "Umm...I hate to tell you are actually dead.", "Dead as a doornail.",
+        "How could you be so silly, now you are dead."
+        ]
+        print(random.choice(quips))
+        print("Press 'enter' ")
+        input()
+        print("""
+                         ..-:"''         ''"-..
+                      .-'                      '-.
+                    .'              .     .       '.
+                  .'   .          .    .      .    .''.
+                .'  .    .       .   .   .     .   . ..:.
+              .' .   . .  .       .   .   ..  .   . ....::.
+             ..   .   .      .  .    .     .  ..  . ....:IA.
+            .:  .   .    .    .  .  .    .. .  .. .. ....:IA.
+           .: .   .   ..   .    .     . . .. . ... ....:.:VHA.
+           '..  .  .. .   .       .  . .. . .. . .....:.::IHHB.
+          .:. .  . .  . .   .  .  . . . ...:.:... .......:HIHMM.
+         .:.... .   . ."::"'.. .   .  . .:.:.:II;,. .. ..:IHIMMA
+         ':.:..  ..::IHHHHHI::. . .  ...:.::::.,,,. . ....VIMMHM
+        .:::I. .AHHHHHHHHHHAI::. .:...,:IIHHHHHHMMMHHL:. . VMMMM
+       .:.:V.:IVHHHHHHHMHMHHH::..:" .:HIHHHHHHHHHHHHHMHHA. .VMMM.
+       :..V.:IVHHHHHMMHHHHHHHB... . .:VPHHMHHHMMHHHHHHHHHAI.:VMMI
+       ::V..:VIHHHHHHMMMHHHHHH. .   .I":IIMHHMMHHHHHHHHHHHAPI:WMM
+       ::". .:.HHHHHHHHMMHHHHHI.  . .:..I:MHMMHHHHHHHHHMHV:':H:WM
+       :: . :.::IIHHHHHHMMHHHHV  .ABA.:.:IMHMHMMMHMHHHHV:'. .IHWW
+       '.  ..:..:.:IHHHHHMMHV" .AVMHMA.:.'VHMMMMHHHHHV:' .  :IHWV
+        :.  .:...:".:.:TPP"   .AVMMHMMA.:. "VMMHHHP.:... .. :IVAI
+       .:.   '... .:"'   .   ..HMMMHMMMA::. ."VHHI:::....  .:IHW'
+       ...  .  . ..:IIPPIH: ..HMMMI.MMMV:I:.  .:ILLH:.. ...:I:IM
+     : .   .'"' .:.V". .. .  :HMMM:IMMMI::I. ..:HHIIPPHI::'.P:HM.
+     :.  .  .  .. ..:.. .    :AMMM IMMMM..:...:IV":T::I::.".:IHIMA
+     'V:.. .. . .. .  .  .   'VMMV..VMMV :....:V:.:..:....::IHHHMH
+       "IHH:.II:.. .:. .  . . . " :HB"" . . ..PI:.::.:::..:IHHMMV"
+        :IP""HHII:.  .  .    . . .'V:. . . ..:IH:.:.::IHIHHMMMMM"
+        :V:. VIMA:I..  .     .  . .. . .  .:.I:I:..:IHHHHMMHHMMM
+        :"VI:.VWMA::. .:      .   .. .:. ..:.I::.:IVHHHMMMHMMMMI
+        :."VIIHHMMA:.  .   .   .:  .:.. . .:.II:I:AMMMMMMHMMMMMI
+        :..VIHIHMMMI...::.,:.,:!"I:!"I!"I!"V:AI:VAMMMMMMHMMMMMM'
+        ':.:HIHIMHHA:"!!"I.:AXXXVVXXXXXXXA:."HPHIMMMMHHMHMMMMMV
+          V:H:I:MA:W'I :AXXXIXII:IIIISSSSSSXXA.I.VMMMHMHMMMMMM
+            'I::IVA ASSSSXSSSSBBSBMBSSSSSSBBMMMBS.VVMMHIMM'"'
+             I:: VPAIMSSSSSSSSSBSSSMMBSSSBBMMMMXXI:MMHIMMI
+            .I::. "H:XIIXBBMMMMMMMMMMMMMMMMMBXIXXMMPHIIMM'
+            :::I.  ':XSSXXIIIIXSSBMBSSXXXIIIXXSMMAMI:.IMM
+            :::I:.  .VSSSSSISISISSSBII:ISSSSBMMB:MI:..:MM
+            ::.I:.  ':"SSSSSSSISISSXIIXSSSSBMMB:AHI:..MMM.
+            ::.I:. . ..:"BBSSSSSSSSSSSSBBBMMMB:AHHI::.HMMI
+            :..::.  . ..::":BBBBBSSBBBMMMB:MMMMHHII::IHHMI
+            ':.I:... ....:IHHHHHMMMMMMMMMMMMMMMHHIIIIHMMV"
+              "V:. ..:...:.IHHHMMMMMMMMMMMMMMMMHHHMHHMHP'
+               ':. .:::.:.::III::IHHHHMMMMMHMHMMHHHHM"
+                 "::....::.:::..:..::IIIIIHHHHMMMHHMV"
+                   "::.::.. .. .  ...:::IIHHMMMMHMV"
+                     "V::... . .I::IHHMMV"'
+                       '"VHVHHHAHHHHMMV:"'
+        """)
+        exit()
+
+def combat(object, adv, enm):
+
+    adv_hp = adv.hp
+    enm_hp = enm.hp
+
+    while adv_hp > 0 and enm_hp > 0:
+
+        if enm_hp == 0:
+            print("You defeated your foe.")
+            return
+
+        adv_attack = randint(1,20)
+        print(f"{adv.name} rolls>>>>>", adv_attack)
+        enm_attack = randint(1,20)
+        print(f"{enm.name} rolls<<<<<", enm_attack)
+        if adv_attack == 20:
+            print("-" * 20)
+            print("CRITICAL HIT \a")
+            print("-" * 20)
+            enm_hp -= 3
+
+        elif adv_attack >= enm_attack:
+            print("Take that!", enm.name)
+            enm_hp -= 1
+            # print("Enemy hit points:", enm_hp)
+            input()
+            continue
+
+        elif enm_attack > adv_attack:
+            adv_hp -= 1
+            print("Ouchie.")
+            print("Your health:", adv_hp)
+            print("Would you like to attack again? y or n")
+            answer = input()
+
+            if adv_hp == 0:
+                return Death.enter()
+
+            if answer == "y":
+                continue
+
+            elif answer == "n":
+                print(dedent("""
+                Your mother was a coward and your father also.
+                And you are destined to lead a coward's life.  As these thoughts
+                run through your mind you stumble around and accidentally fall on
+                your sword.
+                """))
+                print("press 'enter'")
+                input()
+                return Death.enter()
+
+def Invalid():
+    print("-" * 20)
+    print("invalid input")
+    print("-" * 20)
+
+Maze.enter()
